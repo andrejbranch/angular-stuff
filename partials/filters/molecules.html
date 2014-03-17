@@ -1,0 +1,31 @@
+<div id="molecules-filter-container" ng-controller="MoleculesFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Molecules..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredMolecules.length">
+            <li ng-repeat="filteredMolecule in filteredMolecules">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleMolecule('remove', filteredMolecule)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredMolecule.name}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="molecule in molecules | filter:search | orderBy:'name'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleMolecule('append', molecule)"
+                    type="checkbox"
+                />
+                <div class="description">{{molecule.name}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Molecules</li>
+    </ul>
+</div>

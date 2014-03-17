@@ -1,0 +1,97 @@
+<div id="ut-detail-container" class="ut-hp-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="hp-header-icon" src="/images/utilities/gocore/meeting-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="croweLab">Crowelab</li>
+            <li ui-sref="project({projectId:meeting.hybridomaProjectId})">Hybridoma Project {{meeting.hybridomaProjectId}}</li>
+            <li class="end">Meeting {{meeting.id}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit(meeting)">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Hybridoma Project Id:</td>
+                            <td>
+                                <a ui-sref="project({projectId:meeting.hybridomaProjectId})" class="flat-link">
+                                    Hybridoma Project {{meeting.hybridomaProjectId}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Meeting Date:</td>
+                            <td>{{meeting.meetingDate}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Next Meeting Date:</td>
+                            <td>{{meeting.nextMeetingDate}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Meeting Summary">
+                <div ng-bind-html="meeting.summary"></div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="HybridomaProjectMeeting"
+                    oid="meeting.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="meeting"
+                    oid="meeting.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+        <div class="side-column">
+            <ut-edit-module title="People">
+                <table class="detail">
+                    <tr class="ut-hp-side-column-tr">
+                        <td>Contacts:</td>
+                        <td>
+                            <ul class="collaborator-list">
+                                <li ng-repeat="contact in meeting.contacts" class="collaborator">
+                                    <a ng-if="!$last"class="flat-link" ui-sref="contact({contactId:contact.id})">
+                                        {{contact.name + ", " + "&nbsp;"}}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ui-sref="contact({contactId:contact.id})">
+                                        {{contact.name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

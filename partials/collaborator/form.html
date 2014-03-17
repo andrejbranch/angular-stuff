@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h3 ng-if="!collaborator.id">Create Collaborator</h3>
+    <h3 ng-if="collaborator.id">Edit Collaborator {{ collaborator.id }} - {{ collaborator.groupName }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in collaborator.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Group Name" required>
+                    <ut-input
+                        model="collaborator.groupName"
+                        error="collaborator.errors.groupName"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Description">
+                    <ut-input
+                        model="collaborator.description"
+                        error="collaborator.errors.description"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Location">
+                    <ut-input
+                        model="collaborator.location"
+                        error="collaborator.errors.location"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Contacts" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="contact"
+                        model="collaborator"
+                        foreign-key="contactId"
+                        relation="CollaboratorContacts"
+                        access="collaborator.contacts"
+                        placeholder="name"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Collaborator" oid="collaborator.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="collaborator.id">Save</a>
+        <a ng-if="!collaborator.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,31 @@
+<input data-value="{{value}}" ng-model="search"></input>
+<div class="grid-pop-results-container" ng-show="hidden" ut-position-aware>
+    <table>
+        <thead>
+            <tr>
+                <th ng-repeat="property in properties">{{property}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                class="selectable"
+                ng-click="setInput({value:row.id, placeholder:row[method]})"
+                ng-repeat='row in results'
+                ut-grid-pop-row
+            >
+                <td ng-repeat="property in properties">{{row[property]}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">
+                    <i ng-click="previousPage()" class="icon-backward"></i>
+                    <div class="result-count">
+                        {{ results.0.rangeString }}
+                    </div>
+                    <i ng-click="nextPage()" class="icon-forward"></i>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

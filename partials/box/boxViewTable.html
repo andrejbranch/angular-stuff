@@ -1,0 +1,38 @@
+<div class="f{{box.width}} box-description">
+    <h3>{{box.heading}}</h3>
+</div>
+<table
+    id="is2-box-table"
+    data-id="{{box.id}}"
+    cellspacing="10"
+    oncontextmenu="return false"
+    ng-class="{'editable': box.userCanEdit, 'awaiting': box.userAwaitingPermission }"
+>
+    <tr ng-repeat='row in box.positions'>
+        <td
+            ng-repeat="sampleBoxPosition in row"
+            data-position="{{ sampleBoxPosition.position }}"
+            ng-class="{'full':sampleBoxPosition.description}"
+            class="g{{sampleGradients[sampleBoxPosition.description]}}"
+            ut-sample-box-position
+        >
+            <div class="count">{{ sampleBoxPosition.position }}</div>
+
+            <i
+                class="edit-icon icon-pencil"
+                ng-if="sampleBoxPosition.sampleId"
+                ng-click="open(sampleBoxPosition.sampleId)"
+            />
+
+            <i
+                class="detail-icon icon-list-alt"
+                ng-if="sampleBoxPosition.sampleId"
+                ui-sref="sample({sampleId:sampleBoxPosition.sampleId})"
+            />
+
+            <div class="wrapper">
+                <a class="description">{{ sampleBoxPosition.description }}</a>
+            </div>
+        </td>
+    </tr>
+</table>

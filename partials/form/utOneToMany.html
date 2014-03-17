@@ -1,0 +1,22 @@
+<input type="hidden"/>
+<div id="ut-one-to-many-container">
+    <ul class="selected">
+        <li ng-repeat="selectedItem in selectedItems">
+            {{selectedItem[placeholder]}}
+            <div class="remove" ng-click="remove(selectedItem)">x</div>
+        </li>
+        <li>
+            <input id="one-to-many-search" type="text" ng-model="search"></input>
+        </li>
+    </ul>
+    <div class="results-container" ng-show="items">
+        <ul>
+            <li ng-repeat="item in items" ng-click="select(item)" ng-show="items[0].gridParams.total">
+                {{item[placeholder]}}
+            </li>
+            <li class="no-results" ng-show="!items[0].gridParams.total">
+                No results found
+            </li>
+        </ul>
+    </div>
+</div>

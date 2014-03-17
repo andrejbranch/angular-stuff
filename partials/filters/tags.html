@@ -1,0 +1,31 @@
+<div id="tags-filter-container" ng-controller="TagsFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Tags..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredTags.length">
+            <li ng-repeat="filteredTag in filteredTags">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleTag('remove', filteredTag)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredTag.name}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="tag in tags | filter:search | orderBy:'name'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleTag('append', tag)"
+                    type="checkbox"
+                />
+                <div class="description">{{tag.name}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Tags</li>
+    </ul>
+</div>

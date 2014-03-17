@@ -1,0 +1,80 @@
+<div id="move-box-container">
+    <div class="modal-header">
+        <h3>Move Box</h3>
+    </div>
+    <div class="modal-body" ut-modal-body>
+        <div class="move-box-wrapper">
+            <div class="freezer-list" ng-if="freezerListShow">
+                <ul>
+                    <li ng-repeat="freezer in freezers" ng-click="selectFreezer(freezer)">
+                        <i class="icon-book"></i>
+                        {{ freezer.nickname }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="division-list" ng-if="divisionListShow">
+                <div class="freezer-breadcrumb">
+                    <i class="icon-arrow-left" ng-click="toggleView('freezerList')"></i>
+                    {{ selectedFreezer.nickname }}
+                </div>
+                <ul>
+                    <li ng-repeat="division in divisions" ng-click="selectDivision(division)">
+                        <i class="icon-th-large"></i>
+                        <a>{{ division.name }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="box-list" ng-if="boxListShow">
+                <div class="freezer-breadcrumb">
+                    <i class="icon-arrow-left" ng-click="toggleView('divisionList')"></i>
+                    {{ selectedFreezer.nickname }}
+                    <span class="divider">/</span>
+                    {{ selectedDivision.name }}
+                </div>
+                <ul>
+                    <li ng-repeat="divisionBox in divisionBoxes" ng-click="selectBox(divisionBox)">
+                        <i class="icon-th"></i>
+                        {{ divisionBox.name + ' - ' + divisionBox.description }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="success" ng-if="successShow">
+                <!-- user can edit -->
+                <div ng-if="moveToBox.isEditableByUser && moveToBox.height == boxToMove.height">
+                    <h3>Would you like to move the contents of:</h3>
+                    <p>{{ boxToMove.heading }}</p>
+                    <h3>to</h3>
+                    <p>{{ moveToBox.heading }}</p>
+                    <p class="note text-warning">Note, any contents in this box will be replaced, however both boxes can be restored if needed.</p>
+                    <div class="actions">
+                        <a>
+                            <button class="btn btn-success" ng-click="moveBox(boxToMove, moveToBox)">Lets Do it!</button>
+                        </a>
+                        <button class="btn" ng-click="toggleView('boxList')">Pick Another Box</button>
+                    </div>
+                </div>
+                <!-- user cant edit -->
+                <div ng-if="!moveToBox.isEditableByUser">
+                    <p class="text-error">Sorry, you dont have permission to edit {{ moveToBox.heading }}. Either pick another box or request permission of this one.</p>
+                    <div class="actions">
+                        <button class="btn" ng-click="toggleView('boxList')">Pick Another Box</button>
+                    </div>
+                </div>
+                <!-- boxes are different proportions -->
+                <div ng-if="moveToBox.height != boxToMove.height">
+                    <p class="text-error">Sorry, these boxes have different proportions and therefore this move is not possible</p>
+                    <div class="actions">
+                        <button class="btn" ng-click="toggleView('boxList')">Pick Another Box</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

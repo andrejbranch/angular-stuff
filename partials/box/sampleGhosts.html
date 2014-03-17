@@ -1,0 +1,16 @@
+<table
+    id="ghost-table"
+    ng-repeat="ghost in ghosts"
+    ut-sample-ghost
+>
+    <tr>
+        <td
+            class="ghost {{ghost.gradient}}"
+            style="top:{{ghost.top}}; left: {{ghost.left}};"
+        >
+            <div class="wrapper">
+                <a class="description">{{ghost.description}}</a>
+            </div>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,44 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="protocols[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Protocol"
+                    ng-show="showColumns.indexOf('protocol') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Description"
+                    ng-show="showColumns.indexOf('description') > -1"
+                    allow-sort="false"
+                >
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="protocol in protocols" class="ut-fade">
+                <td ui-sref="protocol({protocolId:protocol.id})" class="link">{{protocol.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('protocol') > -1"
+                >
+                    {{protocol.protocol}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('description') > -1"
+                >
+                    {{protocol.description}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!protocols[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

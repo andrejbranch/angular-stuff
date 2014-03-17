@@ -1,0 +1,115 @@
+<div id="ut-detail-container" class="ut-hp-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="hp-header-icon" src="/images/utilities/gocore/contact-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="croweLab">Crowelab</li>
+            <li ui-sref="contactGrid.search">Contacts</li>
+            <li class="end">{{contact.id}}</li>
+            <li class="title">{{contact.name}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{contact.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Position:</td>
+                            <td>{{contact.position}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{contact.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone:</td>
+                            <td>{{contact.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fedex Account Number:</td>
+                            <td>{{contact.fedexAccountNumber}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Location:</td>
+                            <td>{{contact.location}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td>{{contact.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>City:</td>
+                            <td>{{contact.city}}</td>
+                        </tr>
+                        <tr>
+                            <td>State:</td>
+                            <td>{{contact.state}}</td>
+                        </tr>
+                        <tr>
+                            <td>Zip Code:</td>
+                            <td>{{contact.zip}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="Contact"
+                    oid="contact.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="Contact"
+                    oid="contact.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+
+        <div class="side-column">
+            <ut-edit-module title="Contact's Collaborator Groups">
+                <table class="detail">
+                    <tr>
+                        <td>Collaborator:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="collaborator in contact.collaborators">
+                                    <a class="flat-link" ng-href="/#/collaborator/{{collaborator.id}}">
+                                        {{collaborator.groupName}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

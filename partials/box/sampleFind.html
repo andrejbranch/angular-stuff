@@ -1,0 +1,32 @@
+<div id="freezer-navigation" ng-class="{expanded:freezerNavExpanded}">
+    <div class="header" ng-click="openFreezerNav()">
+        <i class="icon-white icon-chevron-down"></i>
+        <a>Freezer Navigation</a>
+    </div>
+    <div class="content">
+        <ul class="tabs">
+            <li class="freezers" ui-sref="boxView.freezerList"><i class="icon-white icon-book"></i></li>
+            <li class="divisions" ui-sref="boxView.divisionList({freezerId:box.Division.freezerId})"><i class="icon-white icon-th-large"></i></li>
+            <li class="boxes" ui-sref="boxView.boxList({divisionId:box.Division.id})"><i class="icon-white icon-th-large"></i></li>
+            <li class="search active"><i class="icon-white icon-search"></i></li>
+            <li class="fill"></li>
+        </ul>
+        <div class="search-list">
+            <div class="search-list-container">
+                <p ng-if="boxesWithSample.length">{{ 'Sample ' + sample.id + ' - ' + sample.description + ' exists in boxes:' }}</p>
+                <ul>
+                    <li
+                        ui-sref="boxView.search({boxId:box.id, sampleId: sampleId})"
+                        ng-repeat="box in boxesWithSample" class="box-t"
+                    >
+                        <i class="icon-white icon-th"></i>
+                        <div class="description">
+                            <a>{{ box.heading }}</a>
+                        </div>
+                    </li>
+                </ul>
+                <div ng-if="!boxesWithSample" class="help">Search for a sample to find what boxes its in.</div>
+            </div>
+        </div>
+    </div>
+</div>

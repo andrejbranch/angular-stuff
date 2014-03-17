@@ -1,0 +1,76 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+<div id="ut-grid-table-container">
+    <table ng-if="collaborators[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Group Name"
+                    ng-show="showColumns.indexOf('groupName') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Group Description"
+                    ng-show="showColumns.indexOf('description') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Location"
+                    ng-show="showColumns.indexOf('location') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Contacts"
+                    ng-show="showColumns.indexOf('contactId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="collaborator in collaborators" class="ut-fade">
+                <td ui-sref="collaborator({collaboratorId:collaborator.id})" class="link">{{collaborator.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('groupName') > -1"
+                >
+                    {{collaborator.groupName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('description') > -1"
+                >
+                    {{collaborator.description}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('location') > -1"
+                >
+                    {{collaborator.location}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('contactId') > -1"
+                >
+                    <ul class="collaborator-list">
+                        <li ng-repeat="contact in collaborator.contacts" class="collaborator">
+                            <a ng-if="!$last"class="flat-link" ui-sref="contact({contactId:contact.id})">
+                                {{contact.name + ", " + "&nbsp;"}}
+                            </a>
+                            <a ng-if="$last" class="flat-link" ui-sref="contact({contactId:contact.id})">
+                                {{contact.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!collaborators[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

@@ -1,0 +1,31 @@
+<div id="sample-types-filter-container" ng-controller="SampleTypesFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Sample Types..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredSampleTypes.length">
+            <li ng-repeat="filteredSampleType in filteredSampleTypes">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleSampleType('remove', filteredSampleType)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredSampleType.name}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="sampleType in sampleTypes | filter:search | orderBy:'name'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleSampleType('append', sampleType)"
+                    type="checkbox"
+                />
+                <div class="description">{{sampleType.name}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Sample Types</li>
+    </ul>
+</div>

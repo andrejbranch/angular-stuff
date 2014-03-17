@@ -1,0 +1,7 @@
+<div ng-class="{'active':active, 'left':left}" class="ut-btn {{q}}">
+    <i ng-if="icon" class="{{icon}}" ng-click="toggle()" />
+    <div class='preview' ng-click="toggle()">{{title}}</div>
+    <div class="drop-down">
+        <div ng-include="template"></div>
+    <div>
+</div>

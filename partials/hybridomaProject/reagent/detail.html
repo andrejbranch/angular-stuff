@@ -1,0 +1,152 @@
+<div id="ut-detail-container" class="ut-hp-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="header-icon" src="/images/utilities/gocore/sample-icon.png" />
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="croweLab">Crowelab</li>
+            <li ui-sref="project({projectId:reagent.hybridomaProjectId})">Hybridoma Project {{reagent.hybridomaProjectId}}</li>
+            <li class="end">Reagent {{reagent.description}}</li>
+            <li class="title">{{reagent.description}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit(reagent)">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Hybridoma Project Id:</td>
+                            <td>
+                                <a ui-sref="project({projectId:reagent.hybridomaProjectId})" class="flat-link" class="ut-link-cursor">
+                                    Hybridoma Project {{reagent.hybridomaProjectId}}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td>{{reagent.description}}</td>
+                        </tr>
+                        <tr>
+                            <td>Delivery Status:</td>
+                            <td>{{reagent.status}}</td>
+                        </tr>
+                        <tr>
+                            <td>Scheduled Arrival Date:</td>
+                            <td>{{reagent.scheduledDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Reagent Date Received:</td>
+                            <td>{{reagent.receivedDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sample:</td>
+                            <td>
+                                <a ui-sref="sample({sampleId:reagent.sampleId})" class="flat-link" class="ut-link-cursor">
+                                    Sample {{reagent.sampleId}} - {{reagent.Sample.description}}
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Initial Reagent Amount:</td>
+                            <td>{{reagent.initialAmount}}</td>
+                        </tr>
+                        <tr>
+                            <td>Reagent Last Used Date:</td>
+                            <td>{{reagent.lastUsedOn}}</td>
+                        </tr>
+                        <tr>
+                            <td>Reagent Last Used Amount:</td>
+                            <td>{{reagent.lastUsedAmount}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="HybridomaProjectReagent"
+                    oid="reagent.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="reagent"
+                    oid="reagent.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+        <div class="side-column">
+            <ut-edit-module title="VIMs and MTAs">
+                <table class="detail"> 
+                    <tr class="ut-hp-side-column-tr">
+                        <td>VIMs Orders:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="vimOrder in reagent.vimOrders">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                        {{"VIM Order " + vimOrder.id + " " + vimOrder.vim_order_description + "&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                        {{"VIM Order " + vimOrder.id + " " + vimOrder.vim_order_description}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="ut-hp-side-column-tr">
+                        <td>VIMs Sents:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="vimSent in reagent.vimSents">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                        {{"VIM Sent " + vimSent.id + " " + vimSent.vim_sent_description + "&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                        {{"VIM Sent " + vimSent.id + " " + vimSent.vim_sent_description}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="ut-hp-side-column-tr">
+                        <td>MTAs:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="mta in reagent.mtas">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/utilities/mta/{{mta.id}}">
+                                        {{"MTA " + mta.id + " " + mta.short_description + "&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/utilities/mta/{{mta.id}}">
+                                        {{"MTA " + mta.id + " " + mta.short_description }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

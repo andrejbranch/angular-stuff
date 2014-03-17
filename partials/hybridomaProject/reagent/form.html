@@ -1,0 +1,140 @@
+<div class="modal-header">
+    <h3 ng-if="!reagent.id">Create Hybridoma Reagent</h3>
+    <h3 ng-if="reagent.id">Edit Hybridoma Reagent {{ reagent.id }} - {{ reagent.description }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in reagent.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Description" required>
+                    <ut-input
+                        model="reagent.description"
+                        error="reagent.errors.description"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Status">
+                    <ut-input
+                        model="reagent.status"
+                        error="reagent.errors.status"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="VIM Orders" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="vim-order"
+                        model="reagent"
+                        foreign-key="vimOrderId"
+                        relation="ReagentRelations"
+                        access="reagent.vimOrders"
+                        placeholder="placeholder"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="VIM Sents" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="vim-sent"
+                        model="reagent"
+                        foreign-key="vimSentId"
+                        relation="ReagentRelations"
+                        access="reagent.vimSents"
+                        placeholder="placeholder"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="MTAs" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="mta"
+                        model="reagent"
+                        foreign-key="mtaId"
+                        relation="ReagentRelations"
+                        access="reagent.mtas"
+                        placeholder="placeholder"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="Scheduled Date">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="reagent.scheduledDate"
+                        class="ut-input"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <ut-control-group label="Received Date">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="reagent.receivedDate"
+                        class="ut-input"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <ut-control-group label="Sample">
+                    <ut-typeahead
+                        model="reagent.Sample"
+                        key="reagent.sampleId"
+                        resource="sample-typeahead"
+                        placeholder="description" 
+                        error="reagent.errors.sampleId"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Initial Amount">
+                    <ut-input
+                        model="reagent.initialAmount"
+                        error="reagent.errors.initialAmount"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Last Used On">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="reagent.lastUsedOn"
+                        class="ut-input"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <ut-control-group label="Last Used Amount">
+                    <ut-input
+                        model="reagent.lastUsedAmount"
+                        error="reagent.errors.lastUsedAmount"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="HybridomaProjectReagent" oid="reagent.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="reagent.id">Save</a>
+        <a ng-if="!reagent.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

@@ -1,0 +1,45 @@
+<div id="sample-form-modal">
+    <form>
+        <div class="control-group">
+            <label class="control-label">Created By</label>
+            <div class="controls">
+                <input type="text" ng-model="sample.user" required />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Date</label>
+            <div class="controls">
+                 <input type="text" ng-model="sample.date" required /><br />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Name</label>
+            <div class="controls">
+                 <input type="text" ng-model="sample.description" required /><br />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Aliases</label>
+            <div class="controls">
+                 <input type="text" ng-model="sample.aliases" required /><br />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Donor</label>
+            <div class="controls">
+                 <input type="text" ng-model="sample.donor_id" required /><br />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Protocol</label>
+            <div class="controls">
+                 <input type="text" ng-model="sample.protocol_id " required /><br />
+            </div>
+        </div>
+        <div class="form-actions">
+            <input ng-click="saveSample(sample)" class="btn btn-primary" type="submit" value="Save">
+            <button ng-click="reset()" type="button" class="btn">Cancel</button>
+        <div>
+    </form>
+</div>
+<div class="shadow"></div>

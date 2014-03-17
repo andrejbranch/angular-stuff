@@ -1,0 +1,214 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table ng-if="projects[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    sort-field="name"
+                    label="Name"
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="u.u_first_name"
+                    label="User"
+                    ng-show="showColumns.indexOf('userId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="trg.name"
+                    label="Target"
+                    ng-show="showColumns.indexOf('targetId') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Antigen"
+                    ng-show="showColumns.indexOf('antigen') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Objective"
+                    ng-show="showColumns.indexOf('objective') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Screening Protocol"
+                    ng-show="showColumns.indexOf('screeningProtocol') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Neutralization Protocol"
+                    ng-show="showColumns.indexOf('neutProtocol') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Neutralization Location"
+                    ng-show="showColumns.indexOf('neutLocation') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Last Meeting Date"
+                    ng-show="showColumns.indexOf('lastMeetingDate') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Last Meeting Summary"
+                    ng-show="showColumns.indexOf('lastMeetingSummary') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Next Meeting Date"
+                    ng-show="showColumns.indexOf('nextMeetingDate') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Last Experiment Date"
+                    ng-show="showColumns.indexOf('lastExperimentDate') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Last Experiment Summary"
+                    ng-show="showColumns.indexOf('lastExperimentSummary') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="created_at"
+                    label="Created At"
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    sort-field="updated_at"
+                    label="Updated At"
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                </th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="project in projects" class="ut-fade">
+                <td ui-sref="project({projectId:project.id})" class="link">{{project.id}}</td>
+                <td
+                    ui-sref="project({projectId:project.id})"
+                    class="link"
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                    {{project.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('userId') > -1"
+                >
+                    {{project.User.fullName}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('targetId') > -1"
+                >
+                    {{project.Target.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('antigen') > -1"
+                >
+                    {{project.antigen}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('objective') > -1"
+                >
+                    {{project.objective}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('screeningProtocol') > -1"
+                >
+                    {{project.screeningProtocol}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('neutProtocol') > -1"
+                >
+                    {{project.neutProtocol}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('neutLocation') > -1"
+                >
+                    {{project.neutLocation}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('lastMeetingDate') > -1"
+                >
+                    {{project.lastMeetingDate}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('lastMeetingSummary') > -1"
+                >
+                    {{project.lastMeetingSummary}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('nextMeetingDate') > -1"
+                >
+                    {{project.nextMeetingDate}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('lastExperimentDate') > -1"
+                >
+                    {{project.lastExperimentDate}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('lastExperimentSummary') > -1"
+                >
+                    {{project.lastExperimentSummary}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('created_at') > -1"
+                >
+                    {{Date.parse(project.created_at) | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('updated_at') > -1"
+                >
+                    {{Date.parse(project.updated_at) | date:'MM/dd/yy @ h:mma'}}
+                </td>
+                <td class="actions">
+                    <ut-dropdown
+                        icon="icon-cog"
+                        template="/app/partials/hybridomaProject/grid_actions.html"
+                        data="project"
+                    >
+                    </ut-dropdown>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!projects[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

@@ -1,0 +1,43 @@
+<ul class="box-view-list">
+    <div ng-include="'/app/partials/box/boxViewActions.html'"></div>
+    <li id="box-container">
+        <div class="box-wrapper">
+            <div ng-include class="box" src="'/app/partials/box/boxViewTable.html'"></div>
+        </div>
+    </li>
+    <li>
+        <div class="actions-container">
+            <div class="search-container">
+                <a>Find your sample</a>
+                <div class="input-container inline">
+                    <ut-grid-pop resource="Sample" properties="id description aliases" method="description"></ut-grid-pop>
+                </div>
+                <div style="color:black; display: inline-block">
+                    <button
+                        class="btn"
+                        ng-click="open()"
+                        popover="Create a new sample"
+                        popover-trigger="mouseenter"
+                        popover-popup-delay="700"
+                        popover-placement="top"
+                    >
+                        +
+                    </button>
+                </div>
+            </div>
+            <ul>
+            <table>
+                <tr>
+                    <td ng-class="{'inactive': !brush.active}" class="brush" ut-box-brush brush="{{brush.active}}"></td>
+                    <td class="paint {{paint.sample.gradient}}">
+                        <ut-box-paint></ut-box-paint>
+                    </td>
+                    <td class="filler" ut-sample-toggle></td>
+                </tr>
+            </table>
+            <div ui-view></div>
+            <div ng-include src="'/app/partials/box/iceBox.html'"></div>
+            <div ng-include src="'/app/partials/box/saveBox.html'"></div>
+        </div>
+    </li>
+</ul>

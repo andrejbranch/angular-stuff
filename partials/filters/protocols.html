@@ -1,0 +1,31 @@
+<div id="protocols-filter-container" ng-controller="ProtocolsFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Protocols..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredProtocols.length">
+            <li ng-repeat="filteredProtocol in filteredProtocols">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleProtocol('remove', filteredProtocol)"
+                        type="checkbox"
+                    />
+                    {{filteredProtocol.protocol}}
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="protocol in protocols | orderBy:'protocol'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleProtocol('append', protocol)"
+                    type="checkbox"
+                />
+                {{protocol.protocol}}
+            </label>
+        </li>
+        <li class="help">Start typing for Protocols</li>
+    </ul>
+</div>

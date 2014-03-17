@@ -1,0 +1,31 @@
+<div id="donors-filter-container" ng-controller="DonorsFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Donors..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredDonors.length">
+            <li ng-repeat="filteredDonor in filteredDonors">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleDonor('remove', filteredDonor)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredDonor.aliases}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="donor in donors | orderBy:'aliases'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleDonor('append', donor)"
+                    type="checkbox"
+                />
+                <div class="description">{{donor.aliases}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Donors</li>
+    </ul>
+</div>

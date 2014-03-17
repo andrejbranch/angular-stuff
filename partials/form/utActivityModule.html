@@ -1,0 +1,36 @@
+<div id="ut-activity-module-container">
+    <ul class="tabs">
+        <li class="active">
+            <a>Comments</a>
+        </li>
+    </ul>
+    <ul class="comments">
+        <li ng-repeat="comment in comments">
+            <div class="comment-container">
+                <div class="comment-heading">
+                    <img ng-src="/profile/avatar/{{comment.userId}}"  />
+                    {{comment.User.fullName}} added a comment on - {{Date.parse(comment.created_at) | date:'MM/dd/yy @ h:mma'}}
+                    <div ng-show="canView(comment)" class="comment-icon-wrapper">
+                        <a ng-click="editComment(comment)">
+                            <i class="icon-pencil"/>
+                        </a>
+                        <a ng-click="deleteComment(comment)">
+                            <i class="icon-trash"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="comment">{{comment.comment}}</div>
+            </div>
+        </li>
+    </ul>
+    <ul id="new-comment" class="new-comment">
+        <li ng-if="newComment">
+            <textarea ng-model="newComment.comment" />
+            <button class="btn btn-small" ng-click="save()">Add</button>
+            <a href="" ng-click="cancel()">Cancel</a>
+        </li>
+    </ul>
+    <div class="comment-actions">
+        <button ng-if="!newComment" class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+    </div>
+</div>

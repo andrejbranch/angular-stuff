@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3>Delete Attachment</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <div id="ut-comment-modal">
+        <div class="form-horizontal">
+            <p>Are you sure you want to delete this attachment?</p>
+            <ut-control-group label="Creator:" class="author">
+                <img class="ut-comment-img" ng-src="/profile/avatar/{{objectAttachment.Attachment.uploadedBy}}"/>
+                {{ objectAttachment.Attachment.UploadedBy.fullName }}
+            </ut-control-group>
+
+            <ut-control-group label="Created at:" class="created">
+                <div> {{Date.parse(objectAttachment.Attachment.created_at) | date:'MM/dd/yy @ h:mma'}} </div>
+            </ut-control-group>
+
+            <ut-control-group label="Attachment:" class="notes">
+                {{objectAttachment.Attachment.name}}
+            </ut-control-group>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="deleteObjectAttachment()" style="margin-right:5px;">
+        <a>Delete</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

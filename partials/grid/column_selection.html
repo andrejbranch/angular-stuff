@@ -1,0 +1,18 @@
+<div id="column-selection-container" ng-controller="ColumnSelectionController">
+    <ul>
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Search for Columns..."></input>
+        </li>
+        <li ng-repeat="column in  userGridSetting.columns | filter:search">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleColumn(column.name)"
+                    type="checkbox"
+                    ng-checked="column.selected"
+                />
+                {{column.label}}
+            </label>
+        </li>
+    </ul>
+</div>

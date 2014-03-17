@@ -1,0 +1,16 @@
+<div id="ut-attachment-uploader-container">
+<table ng-if="files.length">
+    <tbody>
+        <tr ng-repeat="file in files">
+            <td>
+                <img ng-if="isImage(file)" class="img-polaroid" ng-src="{{file.src}}" title="file.name" />
+            </td>
+            <td class="name">{{file.name}}</td>
+            <td class="loading">
+                <progress percent="file.progress"></progress>
+            </td>
+        </tr>
+    </tbody>
+</table>
+    <input type="file" multiple onchange="angular.element(this).scope().setFiles(this)"></input>
+</div>

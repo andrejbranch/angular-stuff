@@ -1,0 +1,27 @@
+<div ng-if="gridParams && gridParams.total" class="grid-range" ng-controller="GridPaginationController">
+    <div class="page-select">
+        <a
+            ng-click="turnPage(gridParams.previousPage)"
+            class="previous"
+            ng-if="gridParams.previousPage"
+        >
+        <a
+            ng-click="turnPage(page.number)"
+            ng-repeat="page in pages"
+            ng-class="{current: page.number == gridParams.page}"
+            class="page"
+        >
+            {{page.number}}
+        </a>
+        <a
+            ng-click="turnPage(nextPage)"
+            class="next"
+            ng-if="gridParams.hasNextPage"
+        >
+        </a>
+    </div>
+
+    <a class="range">{{gridParams.range}}</a>
+    <a>of</a>
+    <a class="range">{{gridParams.total}}</a>
+</div>

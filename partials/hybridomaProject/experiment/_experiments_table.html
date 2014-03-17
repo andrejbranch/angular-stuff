@@ -1,0 +1,46 @@
+<div id="ut-hp-table" ng-controller="HybridomaProjectExperimentsController">
+    <div class="ut-relative-plus-icon" ng-click="experimentModal()">
+        <i class="icon-plus"></i>
+    </div>
+    <table ng-show="experiments.length">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th> Protocol </th>
+                <th> Description </th>
+                <th> Planned Date </th>
+                <th> Completed Date </th>
+                <th> Plates </th>
+                <th> Results Summary </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="collaborator-list">
+            <tr ng-repeat="experiment in experiments">
+                <td ui-sref="experiment({projectId:experiment.hybridomaProjectId, experimentId:experiment.id})" class="link">{{experiment.id}}</td>
+                <td> 
+                    <a  ui-sref="protocol({protocolId:experiment.protocolId})" class="flat-link" class="ut-flat-link-cursor">
+                        {{experiment.Protocol.protocol}}
+                    </a>
+                </td>
+                <td> {{experiment.description}} </td>
+                <td> {{experiment.plannedDate}} </td>
+                <td> {{experiment.completedDate}} </td>
+                <td> {{experiment.plates}} </td>
+                <td> 
+                    <a class="ut-column-text-sizer">
+                        {{experiment.resultSummary}}
+                    </a>
+                </td>
+                <td class="ut-actions-td">
+                    <div class="ut-table-edit-delete-icons">
+                        <i class="icon-pencil" ng-click="experimentModal(experiment)"></i>
+                    </div>
+                    <div class="ut-table-edit-delete-icons" ng-click="deleteExperiment(experiment)">
+                        <i class="icon-trash"></i>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

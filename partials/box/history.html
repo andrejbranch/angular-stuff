@@ -1,0 +1,32 @@
+<div id="move-box-container">
+    <div class="modal-header">
+        <h3>Box History for Box {{ box.id }}</h3>
+    </div>
+    <div class="modal-body" ut-modal-body>
+        <div id="box-history-container">
+            <p class="text-warning">A box snapshot is the last save point of a box. Below are all the snapshots for this box.</p>
+            <ul>
+                <li ng-repeat="boxSnapshot in boxSnapshots">
+                    - {{ boxSnapshot.created_at }}
+                    <button
+                        ng-if="$index == 0"
+                        class="btn btn-success"
+                        ng-click="currentState()"
+                    >
+                        Current State
+                    </button>
+                    <button
+                        ng-if="$index != 0"
+                        class="btn"
+                        ng-click="viewSnapshot(boxSnapshot.created_at)"
+                    >
+                        View snapshot
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<div id="go-core-container">
+    <h2>GoCore</h2>
+    <div class="go-core lead">
+        <ut-web-text name="aboutGocore"></ut-web-text>
+    </div>
+    <div class="apps">
+        <h2>Applications</h2>
+        <table class="utility-app-icon">
+            <tbody>
+                <tr>
+                    <td
+                        class='icon'
+                        group="users"
+                        link="/gocore/maxiprep"
+                        title="DNA Purification"
+                        ut-app-icon
+                    >
+                    </td>
+                    <td
+                        class='icon'
+                        group="users"
+                        link="/expression"
+                        title="Protein Expression"
+                        ut-app-icon
+                    >
+                    <td
+                        class='icon'
+                        group="users"
+                        link="/hybridoma-purification"
+                        title="Hybridoma Purification"
+                        ut-app-icon
+                    >
+                    </td>
+                    <td
+                        class='icon'
+                        group="users"
+                        link="/high_density_culture"
+                        title="High density cell culture"
+                        ut-app-icon
+                    >
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        class='icon'
+                        group="users"
+                        link="http://crowelab.com:8090/display/AVGCR/Antibody+V+gene+cloning+requests"
+                        title="V Gene Cloning"
+                        ut-app-icon
+                    >
+                    </td>
+                    <td
+                        class='icon'
+                        group="users"
+                        link="http://crowelab.com:8090/display/AIR/Antibody+isotyping+requests"
+                        title="Isotype Determination"
+                        ut-app-icon
+                    >
+                    </td>
+                    <td
+                        class='icon'
+                        group="users"
+                        link="http://crowelab.com:8090/display/MD/Mycoplasma+detection"
+                        title="Mycoplasma detection"
+                        ut-app-icon
+                    >
+                    </td>
+                    <td
+                        class='icon'
+                        group="users"
+                        link="/#/hybridoma-project/search"
+                        title="Hybridoma Project"
+                        ut-app-icon
+                    >
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="isGocoreAdmin">
+        <div id="gocore-tools-container">
+            <div class="tools">
+                <h2>GoCore Admin Tools</h2>
+                <table class="icons">
+                    <tbody>
+                        <tr>
+                            <td
+                                class='icon'
+                                group="GoCore"
+                                link="/affinity_column"
+                                title="Affinity Columns"
+                                ut-app-icon
+                            >
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="go-core-address">
+        <address>
+            <strong>Go Core</strong><br>
+            2213 Garland Avenue, 11475 Medical Research Building IV<br>
+            Nashville, TN 37232 <br>
+            <abbr title="Phone">P:</abbr> 615.343.8064
+        </address>
+        <address>
+          <strong>Email</strong><br>
+          <a href="mailto:gocore@vvcenter.org">gocore@vvcenter.org</a>
+        </address>
+    </div>
+</div>

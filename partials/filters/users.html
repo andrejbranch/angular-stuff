@@ -1,0 +1,33 @@
+<div id="users-filter-container" ng-controller="UsersFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Users ..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredUsers.length">
+            <li class="ut-fade" ng-repeat="filteredUser in filteredUsers">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleUser('remove', filteredUser)"
+                        type="checkbox"
+                    />
+                    <img ng-src="/profile/avatar/{{filteredUser.u_id}}"  />
+                    {{filteredUser.fullName}}
+                </label>
+            </li>
+        </ul>
+        <li class="ut-fade" ng-repeat="user in users | orderBy:'fullName'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleUser('append', user)"
+                    type="checkbox"
+                />
+                <img ng-src="/profile/avatar/{{user.u_id}}"  />
+                {{ user.fullName }}
+            </label>
+        </li>
+        <li class="help">Start typing for Users</li>
+    </ul>
+</div>

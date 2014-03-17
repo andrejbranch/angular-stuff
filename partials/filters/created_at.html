@@ -1,0 +1,84 @@
+<div id="created-at-filter-container" ng-controller="CreatedAtFilterController">
+    <ul>
+        <li>
+            <div class="date-range-wrapper">
+                <label>
+                    <input
+                        type="checkbox"
+                        ng-model="withinLast"
+                        ng-change="toggle('withinLast')"
+                    />
+                    Within the last
+                </label>
+                <input
+                    class="number-input"
+                    ng-model="within"
+                    type="text"
+                />
+                <select ng-model="withinUnits" type="text" class="date-type-chooser">
+                    <option value="hour"> hours </option>
+                    <option value="day"> days </option>
+                    <option value="week"> weeks </option>
+                    <option value="month"> months </option>
+                </select>
+            </div>
+        </li>
+        <li>
+            <div class="date-range-wrapper">
+                <label>
+                    <input
+                        type="checkbox"
+                        ng-model="moreThan"
+                        ng-change="toggle('moreThan')"
+                    />
+                    More than
+                </label>
+                <input
+                    class="number-input"
+                    ng-model="more"
+                    type="text"
+                />
+                <select ng-model="moreUnits" class="date-type-chooser">
+                    <option value="hour"> hours </option>
+                    <option value="day"> days </option>
+                    <option value="week"> weeks </option>
+                    <option value="month"> months </option>
+                </select>
+                <label> ago</label>
+            </div>
+        </li>
+        <li>
+            <div class="date-range-wrapper">
+                <label>
+                    <input
+                        type="checkbox"
+                        ng-model="betweenDate"
+                        ng-change="toggle('betweenDate')"
+                    />
+                    Between
+                </label>
+                <input
+                    class="date-input"
+                    ng-model="start"
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                />
+                <label> and </label>
+                <input
+                    class="date-input"
+                    ng-model="end"
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                />
+            </div>
+        </li>
+    </ul>
+    <div class="date-range-buttons">
+        <button class="btn btn-small" ng-click="update()" style="margin-right:5px;">
+            <a>Update</a>
+        </button>
+        <button class="btn btn-small" ng-click="clear()" style="margin-right:5px;">
+            <a>Clear</a>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,189 @@
+<div class="modal-header">
+    <h3 ng-if="!sample.id">Create Sample</h3>
+    <h3 ng-if="sample.id">Edit Sample {{ sample.id }} - {{ sample.description }}</h3>
+</div>
+<div class="modal-body" ut-modal-body>
+    <form id="sample-modal-form" class="form-horizontal">
+        <div class="space-medium">
+
+            <ut-control-group>
+                <div ng-repeat="globalError in sample.globalErrors" class="ut-global-error">
+                    {{globalError}}
+                </div>
+            </ut-control-group>
+
+            <ut-control-group label="User" required>
+                <ut-typeahead
+                    model="sample.User"
+                    key="sample.user_id"
+                    resource="user"
+                    resource-primary-key="u_id"
+                    placeholder="fullName"
+                    template-url="/app/partials/typeahead/user.html"
+                    disabled
+                    error="sample.errors.user_id"
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Date">
+                <input
+                    type="text"
+                    datepicker-popup="M/dd/yyyy"
+                    ng-model="sample.date"
+                    class="ut-input"
+                />
+            </ut-control-group>
+
+            <ut-control-group label="Name" required>
+                <ut-input
+                    model="sample.description"
+                    error="sample.errors.description"
+                    disabled="sampleDescriptionDisabled"
+                >
+                </ut-input>
+            </ut-control-group>
+
+            <ut-control-group label="Aliases">
+                <textarea type="text" ng-model="sample.aliases" class="span5 ut-typeahead" />
+            </ut-control-group>
+
+            <ut-control-group label="Donor">
+                <ut-typeahead
+                    model="sample.Donor"
+                    key="sample.donor_id"
+                    resource="donor"
+                    placeholder="aliases"
+                    error="sample.errors.donor_id"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <ut-control-group label="Protocol">
+                <ut-typeahead
+                    model="sample.Protocol"
+                    key="sample.protocol_id"
+                    resource="protocol"
+                    placeholder="description"
+                    error="sample.errors.protocol_id"
+                >
+                </ut-typeahead>
+            </ut-control-group>
+
+            <div class="ut-form-divider"></div>
+
+            <table>
+                <tr>
+                    <td>
+                        <ut-control-group label="Preset">
+                            <ut-typeahead
+                                model="preset"
+                                resource="preset"
+                                placeholder="name"
+                                key="preset_id"
+                                callback="presetSelect"
+                                disabled="sampleClassificationDisabled"
+                            >
+                            </ut-typeahead>
+                            <ut-help-icon link="/sample-classification-help"></ut-help-icon>
+                        </ut-control-group>
+                    </td>
+                    <td class="classification-c2">
+                        <div>
+
+                            <ut-control-group label="Sample Type">
+                                <ut-typeahead
+                                    model="sample.SampleType"
+                                    key="sample.sample_type_id"
+                                    resource="sample-type"
+                                    placeholder="name"
+                                    error="sample.errors.sample_type_id"
+                                    callback="classify"
+                                    disabled="sampleClassificationDisabled"
+                                >
+                                </ut-typeahead>
+                                <ut-help-icon link="/sample-classification-help"></ut-help-icon>
+                            </ut-control-group>
+
+                            <ut-control-group label="Molecule">
+                                <ut-typeahead
+                                    model="sample.Molecule"
+                                    key="sample.molecule_id"
+                                    resource="molecule"
+                                    placeholder="name"
+                                    error="sample.errors.molecule_id"
+                                    callback="classify"
+                                    disabled="sampleClassificationDisabled"
+                                >
+                                </ut-typeahead>
+                                <ut-help-icon link="/sample-classification-help"></ut-help-icon>
+                            </ut-control-group>
+
+                            <ut-control-group label="Tag">
+                                <ut-typeahead
+                                    model="sample.Tag"
+                                    key="sample.tag_id"
+                                    resource="tag"
+                                    placeholder="name"
+                                    error="sample.errors.tag_id"
+                                    callback="classify"
+                                    disabled="sampleClassificationDisabled"
+                                >
+                                </ut-typeahead>
+                                <ut-help-icon link="/sample-classification-help"></ut-help-icon>
+                            </ut-control-group>
+
+                            <ut-control-group label="Target">
+                                <ut-typeahead
+                                    model="sample.Target"
+                                    key="sample.target_id"
+                                    resource="target"
+                                    placeholder="name"
+                                    error="sample.errors.target_id"
+                                    callback="classify"
+                                    disabled="sampleClassificationDisabled"
+                                >
+                                </ut-typeahead>
+                                <ut-help-icon link="/sample-classification-help"></ut-help-icon>
+                            </ut-control-group>
+
+                            <ut-control-group label="Parent">
+                                <ut-typeahead
+                                    model="sample.Parent"
+                                    key="sample.parent_id"
+                                    resource="sample"
+                                    placeholder="description"
+                                    error="sample.errors.parent_id"
+                                    callback="classify"
+                                    disabled="sampleClassificationDisabled"
+                                >
+                                </ut-typeahead>
+                                <ut-help-icon link="/sample-classification-help"></ut-help-icon>
+                            </ut-control-group>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="ut-form-divider"></div>
+
+            <ut-control-group label="Notes">
+                <textarea class="rich" ng-model="sample.notes" ut-rich-text-area></textarea>
+            </ut-control-group>
+
+            <div class="ut-form-divider"></div>
+
+            <ut-control-group label="Attachments">
+                <ut-attachment-uploader o="Sample" oid="sample.id" trigger="handleUpload"></ut-attachment-uploader>
+            </ut-control-group>
+
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="sample.id">Save</a>
+        <a ng-if="!sample.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

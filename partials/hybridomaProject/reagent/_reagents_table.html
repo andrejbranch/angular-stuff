@@ -1,0 +1,81 @@
+<div id="ut-hp-table" ng-controller="HybridomaProjectReagentsController">
+    <div class="ut-relative-plus-icon" ng-click="reagentModal()">
+        <i class="icon-plus"></i>
+    </div>
+    <table ng-show="reagents.length">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th> Description </th>
+                <th> Status </th>
+                <th> VIM Order</th>
+                <th> VIM Sent</th>
+                <th> MTA </th>
+                <th> Scheduled Date </th>
+                <th> Received Date </th>
+                <th> Sample </th>
+                <th> Initial Amount </th>
+                <th> Last Used On </th>
+                <th> Last Used Amount </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="reagent in reagents" class="collaborator-list">
+                <td ui-sref="reagent({projectId:reagent.hybridomaProjectId, reagentId:reagent.id})" class="link">{{reagent.id}}</td>
+                <td> {{reagent.description}} </td>
+                <td> {{reagent.status}} </td>
+                <td>
+                    <ul>
+                        <li ng-repeat="vimOrder in reagent.vimOrders" class="collaborator">
+                            <a ng-if="!$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                {{"VIM Order " + vimOrder.id + ",&nbsp;" }}
+                            </a>
+                            <a ng-if="$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                {{"VIM Order " + vimOrder.id}}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li ng-repeat="vimSent in reagent.vimSents" class="collaborator">
+                            <a ng-if="!$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                {{"VIM Sent " + vimSent.id + ",&nbsp;" }}
+                            </a>
+                            <a ng-if="$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                {{"VIM Sent " + vimSent.id}}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li ng-repeat="mta in reagent.mtas" class="collaborator">
+                            <a ng-if="!$last" class="flat-link" ng-href="/utilities/mta/{{mta.id}}">
+                                {{"MTA " + mta.id + ",&nbsp;" }}
+                            </a>
+                            <a ng-if="$last" class="flat-link" ng-href="/utilities/mta/{{mta.id}}">
+                                {{"MTA " + mta.id}}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td> {{reagent.scheduledDate}} </td>
+                <td> {{reagent.receivedDate}} </td>
+                <td> 
+                    <a  ui-sref="sample({sampleId:reagent.sampleId})" class="flat-link" class="ut-flat-link-cursor">
+                        {{reagent.Sample.description}}
+                    </a>
+                </td>
+                <td> {{reagent.initialAmount}} </td>
+                <td> {{reagent.lastUsedOn}} </td>
+                <td> {{reagent.lastUsedAmount}} </td>
+                <td class="ut-actions-td">
+                    <i class="icon-pencil" ng-click="reagentModal(reagent)"></i>
+                    <i class="icon-trash" ng-click="deleteReagent(reagent)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

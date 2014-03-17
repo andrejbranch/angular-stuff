@@ -1,0 +1,14 @@
+<div ng-if="gridParams && gridParams.total" class="grid-range ut-fade">
+    <div class="column-selection">
+        <ut-dropdown
+            title="Columns"
+            template="/app/partials/grid/column_selection.html"
+            callback="refresh"
+            data="gridParams"
+        >
+        </ut-dropdown>
+    </div>
+    <a class="range">{{gridParams.range}}</a>
+    <a>of</a>
+    <a class="range">{{gridParams.total}}</a>
+</div>

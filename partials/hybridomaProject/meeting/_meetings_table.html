@@ -1,0 +1,49 @@
+<div id="ut-hp-table" ng-controller="HybridomaProjectMeetingsController">
+    <div class="ut-relative-plus-icon" ng-click="meetingModal()">
+        <i class="icon-plus"></i>
+    </div>
+    <table ng-show="meetings.length">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th> Contacts </th>
+                <th> Meeting Date </th>
+                <th> Meeting Summary </th>
+                <th> Next Meeting Date </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="collaborator-list">
+            <tr ng-repeat="meeting in meetings">
+                <td ui-sref="meeting({projectId:meeting.hybridomaProjectId, meetingId:meeting.id})" class="link">{{meeting.id}}</td>
+                <td >
+                    <ul>
+                        <li ng-repeat="contact in meeting.contacts" class="collaborator">
+                            <a ng-if="!$last"class="flat-link" ui-sref="contact({contactId:contact.id})">
+                                {{contact.name + ", " + "&nbsp;"}}
+                            </a>
+                            <a ng-if="$last" class="flat-link" ui-sref="contact({contactId:contact.id})">
+                                {{contact.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </td>
+                <td> {{meeting.meetingDate}} </td>
+                <td class="collaborator-list">
+                    <a>
+                        {{meeting.summary}}
+                    </a>
+                </td>
+                <td> {{meeting.nextMeetingDate}} </td>
+                <td class="ut-actions-td">
+                    <div class="ut-table-edit-delete-icons">
+                        <i class="icon-pencil" ng-click="meetingModal(meeting)"></i>
+                    </div>
+                    <div class="ut-table-edit-delete-icons" ng-click="deleteMeeting(meeting)">
+                        <i class="icon-trash"></i>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

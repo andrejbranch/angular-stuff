@@ -1,0 +1,46 @@
+<div id="share-container" ng-controller="ShareController">
+    <ul>
+        <label class="share-label">Link</label>
+        <input disabled type="text" ng-model="shareLink"/>
+        <label>User name</label>
+        <li>
+            <input ng-model="search" type="text" placeholder="Find Users ..."/>
+        </li>
+        <ul class="selected">
+            <li class="ut-fade" ng-repeat="selectedUser in selectedUsers">
+                <label>
+                    <input
+                        ng-model="c1"
+                        ng-change="removeUser($index)"
+                        type="checkbox"
+                        ng-checked="true"
+                    />
+                    <img ng-src="/profile/avatar/{{selectedUser.u_id}}" />
+                    {{selectedUser.fullName}}
+                </label>
+            </li>
+            <div class="line-separator" ng-if="selectedUsers.length"></div>
+        </ul>
+        <li class="ut-fade" ng-repeat="user in users">
+            <label>
+                <input
+                    ng-model="c2"
+                    ng-change="toggleUser(user, $index)"
+                    type="checkbox"
+                />
+                <img ng-src="/profile/avatar/{{user.u_id}}"/>
+                {{ user.fullName }}
+            </label>
+        </li>
+        <label>Note</label>
+        <textarea ng-model="shareNote" placeholder="Describe this link"></textarea>
+    </ul>
+    <div id="share-buttons">
+        <button class="btn btn-small" ng-click="share()" style="margin-left:0px;">
+            <a>Share</a>
+        </button>
+        <button class="btn btn-small" ng-click="clear()" style="margin-left:0px;">
+            <a>Clear</a>
+        </button>
+    </div>
+</div>

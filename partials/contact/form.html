@@ -1,0 +1,123 @@
+<div class="modal-header">
+    <h3 ng-if="!contact.id">Create Contact</h3>
+    <h3 ng-if="contact.id">Edit Contact {{ contact.id }} - {{ contact.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in contact.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Name" required>
+                    <ut-input
+                        model="contact.name"
+                        error="contact.errors.name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Position">
+                    <ut-input
+                        model="contact.position"
+                        error="contact.errors.position"
+                    >
+                    </ut-input>
+                </ut-control-group  >
+
+                <ut-control-group label="Location">
+                    <ut-input
+                        model="contact.location"
+                        error="contact.errors.location"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Email">
+                    <ut-input
+                        model="contact.email"
+                        error="contact.errors.email"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Address">
+                    <ut-input
+                        model="contact.address"
+                        error="contact.errors.address"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="City">
+                    <ut-input
+                        model="contact.city"
+                        error="contact.errors.city"
+                    />
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="State">
+                    <ut-input
+                        model="contact.state"
+                        error="contact.errors.state"
+                    />
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Zip">
+                    <ut-input
+                        model="contact.zip"
+                        error="contact.error.zip"
+                    />
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Phone">
+                    <ut-input
+                        model="contact.phone"
+                        error="contact.errors.phone"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Fedex Account Number">
+                    <ut-input
+                        model="contact.fedexAccountNumber"
+                        error="contact.errors.fedexAccountNumber"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Collaborators" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="collaborator"
+                        model="contact"
+                        foreign-key="collaboratorId"
+                        relation="CollaboratorContact"
+                        access="contact.collaborators"
+                        placeholder="groupName"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="Contact" oid="contact.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="contact.id">Save</a>
+        <a ng-if="!contact.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

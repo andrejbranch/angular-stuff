@@ -1,0 +1,86 @@
+<div id="box-edit-container">
+    <div class="modal-header">
+        <h3>Edit Box {{ boxDetail.id }}</h3>
+    </div>
+    <div class="modal-body" ut-modal-body>
+        <form class="form-horizontal">
+            <div class="space-medium">
+                <ut-control-group label="Name">
+                    <ut-input
+                        model="boxDetail.name"
+                        disabled="true"
+                    >
+                    </ut-input>
+                </ut-control-group>
+                <ut-control-group label="Height">
+                    <ut-input
+                        model="boxDetail.height"
+                        disabled="true"
+                    >
+                    </ut-input>
+                </ut-control-group>
+                <ut-control-group label="Width">
+                    <ut-input
+                        model="boxDetail.width"
+                        disabled="true"
+                    >
+                    </ut-input>
+                </ut-control-group>
+                <ut-control-group label="Inventory Description">
+                    <textarea type="text" ng-model="boxDetail.description" class="span5 ut-typeahead" />
+                </ut-control-group>
+                <ut-control-group label="Editable By">
+                    <ut-typeahead
+                        model="user"
+                        resource="user"
+                        callback="addEditableByUser"
+                        placeholder="fullName"
+                        hint="Search for users to add .."
+                    >
+                    </ut-typeahead>
+                    <table id="box-editable-by-table">
+                        <tr ng-repeat="userThatCanEdit in boxDetail.usersThatCanEdit">
+                            <td class="image inline">
+                                <div class="img-avatar inline">
+                                    <img ng-src="/profile/avatar/{{userThatCanEdit.u_id}}" />
+                                </div>
+                            </td>
+                            <td class="content">
+                                {{userThatCanEdit.fullName}}
+                            </td>
+                            <td class="remove">
+                                <a ng-click="removeUserThatCanEdit($index, userThatCanEdit.u_id)" class="ut-icon-minus"></a>
+                            </td>
+                        </tr>
+                    </table>
+                </ut-control-group>
+                <ut-control-group label="Awaiting Permission">
+                    <table id="box-awaiting-table">
+                        <tr ng-repeat="awaitingUser in boxDetail.awaitingUsers">
+                            <td class="image">
+                                <div class="img-avatar inline">
+                                    <img ng-src="/profile/avatar/{{awaitingUser.u_id}}" />
+                                </div>
+                            </td>
+                            <td class="content">
+                                {{awaitingUser.fullName}}
+                            </td>
+                            <td class="grant">
+                                <button ng-click="grantUserPermission($index, awaitingUser)" class="btn btn-success">Grant</button>
+                            </td>
+                            <td class="deny">
+                                <button ng-click="denyUserPermission($index, awaitingUser.u_id)" class="btn btn-danger">Deny</button>
+                            </td>
+                        </tr>
+                    </table>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="save()" style="margin-right:5px;">
+            <a>Save</a>
+        </button>
+        <a href="" ng-click="cancel()">Cancel</a>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="modal-header">
+    <h3 ng-if="!experiment.id">Create Hybridoma Experiment</h3>
+    <h3 ng-if="experiment.id">Edit Hybridoma Experiment {{ experiment.id }} - {{ experiment.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in experiment.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Protocol" required>
+                    <ut-typeahead
+                        model="experiment.Protocol"
+                        key="experiment.protocolId"
+                        placeholder="protocol"
+                        resource="protocol-typeahead"
+                        error="experiment.errors.protocolId"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Description:" required>
+                    <ut-input
+                        model="experiment.description"
+                        error="experiment.errors.description"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Planned Date:" required>
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="experiment.plannedDate"
+                        class="ut-input"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <ut-control-group label="Completed Date:">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="experiment.completedDate"
+                        class="ut-input"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <ut-control-group label="Plate(s):">
+                    <ut-input
+                        model="experiment.plates"
+                        error="experiment.errors.plates"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Result Summary:">
+                    <textarea ng-model="experiment.resultSummary" class="ut-big-text-input"/>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="HybridomaProjectExperiment" oid="experiment.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="experiment.id">Save</a>
+        <a ng-if="!experiment.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

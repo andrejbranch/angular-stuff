@@ -1,0 +1,61 @@
+<div id="is2-box-actions">
+    <div class="dropdown inline">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#"><i class="icon-cog"></i></a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li ng-class="{true: '', false: 'disabled'}[box.isEditableByUser]" ng-click="openBoxEdit()">
+                <a tabindex="-1" href="">
+                    <i ng-class="{true: 'icon-edit', false: 'ut-icon-edit'}[box.isEditableByUser]"></i>
+                    <div class="pad-left-small inline">
+                        Edit Box
+                    </div>
+                </a>
+            </li>
+            <li class="print">
+                <a tabindex="-1" href="/box/{{box.id}}/print">
+                    <i class="icon-print"></i>
+                    <div class="pad-left-small inline">Print</div>
+                </a>
+            </li>
+            <li class="clear-box-contents" ng-click="clearBoxContents()" >
+                <a tabindex="-1" href="">
+                    <i class="icon-remove"></i>
+                    <div class="pad-left-small inline">
+                        Clear Box Contents
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li ng-click="openMoveBox()">
+                <a tabindex="-1" href="">
+                    <i class="icon-share"></i>
+                    <div class="pad-left-small inline">Move Box</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <i
+        class="icon-refresh"
+        ng-click="refreshBox()"
+        popover="Unselect all positions"
+        popover-trigger="mouseenter"
+        popover-popup-delay="700"
+        popover-placement="right"
+    ></i>
+    <i
+        class="icon-trash"
+        ng-click="removeSampleBoxPositions()"
+        popover="Remove selected samples"
+        popover-trigger="mouseenter"
+        popover-popup-delay="700"
+        popover-placement="right"
+    ></i>
+    <i
+        class="history icon-calendar"
+        ng-click="openBoxHistory()"
+        popover="View box history or restore box to an earlier state"
+        popover-trigger="mouseenter"
+        popover-popup-delay="700"
+        popover-placement="right"
+    >
+    </i>
+</div>

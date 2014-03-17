@@ -1,0 +1,23 @@
+<div id="ice-box" ng-class="{expanded:iceBoxExpanded}" ut-ice-box>
+    <div class="header" ng-click="openIceBox()">
+        <i class="icon-white icon-chevron-right"></i>
+        <a>Ice Bucket</a>
+    </div>
+    <div class="content">
+        <div class="samples-wrapper">
+            <table id="ice-box-sample" ng-repeat="sample in iceBoxSamples">
+                <tbody>
+                    <tr>
+                        <td data-sample-id="{{sample.id}}" class="g1" ut-ice-box-sample index="{{$index}}">
+                            <div class="wrapper">
+                                <a class="description">
+                                    {{ sample.description }}
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_top.html'"></div>
+
+<div id="ut-grid-table-container">
+    <table ng-if="contacts[0].gridParams.total">
+        <thead>
+            <tr>
+                <th ut-grid-header sort-field="id" label="Id"></th>
+                <th
+                    ut-grid-header
+                    label="Name"
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Position"
+                    ng-show="showColumns.indexOf('position') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Location"
+                    ng-show="showColumns.indexOf('location') > -1"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Email"
+                    ng-show="showColumns.indexOf('email') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Address"
+                    ng-show="showColumns.indexOf('address') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="City"
+                    ng-show="showColumns.indexOf('city') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="State"
+                    ng-show="showColumns.indexOf('state') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Zip"
+                    ng-show="showColumns.indexOf('zip') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Phone"
+                    ng-show="showColumns.indexOf('phone') > -1"
+                    allow-sort="false"
+                >
+                </th>
+                <th
+                    ut-grid-header
+                    label="Fedex Account Number"
+                    ng-show="showColumns.indexOf('fedexAccountNumber') > -1"
+                    allow-sort="false"
+                >
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="contact in contacts" class="ut-fade">
+                <td ui-sref="contact({contactId:contact.id})" class="link">{{contact.id}}</td>
+                <td
+                    ng-show="showColumns.indexOf('name') > -1"
+                >
+                    {{contact.name}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('position') > -1"
+                >
+                    {{contact.position}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('location') > -1"
+                >
+                    {{contact.location}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('email') > -1"
+                >
+                    {{contact.email}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('address') > -1"
+                >
+                    {{contact.address}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('city') > -1"
+                >
+                    {{contact.city}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('state') > -1"
+                >
+                    {{contact.state}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('zip') > -1"
+                >
+                    {{contact.zip}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('phone') > -1"
+                >
+                    {{contact.phone}}
+                </td>
+                <td
+                    ng-show="showColumns.indexOf('fedexAccountNumber') > -1"
+                >
+                    {{contact.fedexAccountNumber}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div ng-if="!contacts[0].gridParams.total" class="no-results">
+        No Results Found
+    </div>
+</div>
+
+<div class="ut-fade" ng-include="'/app/partials/grid/pagination_bottom.html'"></div>

@@ -1,0 +1,70 @@
+<div class="modal-header">
+    <h3 ng-if="!meeting.id">Create Hybridoma Meeting</h3>
+    <h3 ng-if="meeting.id">Edit Hybridoma Meeting {{ meeting.id }} </h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in meeting.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="Contacts" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="contact"
+                        model="meeting"
+                        foreign-key="contactId"
+                        relation="HybridomaProjectMeetingContacts"
+                        access="meeting.contacts"
+                        placeholder="name"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="Meeting Date" required>
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="meeting.meetingDate"
+                        class="ut-input"
+                        error="meeting.errors.meetingDate"
+                    >
+                    </input>
+                    <div ng-if="meeting.errors.meetingDate" class="ut-global-error">{{meeting.errors.meetingDate}}</div>
+                </ut-control-group>
+
+                <ut-control-group label="Summary">
+                    <textarea ng-model="meeting.summary" class="ut-big-text-input"/>
+                </ut-control-group>
+
+                <ut-control-group label="Next Meeting Date">
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="meeting.nextMeetingDate"
+                        class="ut-input"
+                        error="meeting.errors.nextMeetingDate"
+                    >
+                    </input>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="HybridomaProjectMeeting" oid="meeting.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="meeting.id">Save</a>
+        <a ng-if="!meeting.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

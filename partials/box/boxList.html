@@ -1,0 +1,39 @@
+<div id="freezer-navigation" ng-class="{expanded:freezerNavExpanded}">
+    <div class="header" ng-click="openFreezerNav()">
+        <i class="icon-white icon-chevron-down"></i>
+        <a>Freezer Navigation</a>
+    </div>
+    <div class="content">
+        <ul class="tabs">
+            <li class="freezers" ui-sref="boxView.freezerList"><i class="icon-white icon-book"></i></li>
+            <li class="divisions" ui-sref="boxView.divisionList({freezerId:divisionBoxes.0.Division.freezerId})"><i class="icon-white icon-th-large"></i></li>
+            <li class="boxes active"><i class="icon-white icon-th"></i></li>
+            <li class="search" ui-sref="boxView.search()"><i class="icon-white icon-search"></i></li>
+            <li class="fill"></li>
+        </ul>
+        <div class="box-list">
+            <ul class="freezer-breadcrumb">
+                <li class="freezer-nickname">
+                    {{divisionBoxes.0.Division.Freezer.nickname}}
+                    <span class="divider">/</span>
+                </li>
+                <li class-"division-name">{{divisionBoxes.0.Division.name}}</li>
+            </ul>
+            <div class="box-list-container">
+                <ul>
+                    <li
+                        ng-repeat="divisionBox in divisionBoxes"
+                        class="box-t"
+                        data-id="{{divisionBox.id}}"
+                        ui-sref="boxView.boxList({boxId:divisionBox.id, divisionId:divisionBox.divisionId, snapshot: null, edit: null})"
+                    >
+                        <i class="icon-white icon-th"></i>
+                        <div class="description">
+                            <a>{{divisionBox.name + ' - ' + divisionBox.description}}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

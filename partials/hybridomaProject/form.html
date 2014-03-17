@@ -1,0 +1,128 @@
+<div class="modal-header">
+    <h3 ng-if="!project.id">Create Hybridoma Project</h3>
+    <h3 ng-if="project.id">Edit Hybridoma Project {{ project.id }} - {{ project.name }}</h3>
+</div>
+<div class="ut-form-body">
+    <div class="modal-body" ut-modal-body>
+        <form id="sample-modal-form" class="form-horizontal">
+            <div class="space-medium">
+
+                <ut-control-group>
+                    <div ng-repeat="globalError in project.globalErrors" class="ut-global-error">
+                        {{globalError}}
+                    </div>
+                </ut-control-group>
+
+                <ut-control-group label="User" required>
+                    <ut-typeahead
+                        model="project.User"
+                        key="project.userId"
+                        resource="user"
+                        resource-primary-key="u_id"
+                        placeholder="fullName"
+                        template-url="/app/partials/typeahead/user.html"
+                        disabled
+                        error="project.errors.userId"
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Project Name" required>
+                    <ut-input
+                        model="project.name"
+                        error="project.errors.name"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Target Virus" required>
+                    <ut-typeahead
+                        model="project.Target"
+                        key="project.targetId"
+                        placeholder="name"
+                        resource="target"
+                        error="project.errors.targetId"
+                    >
+                    </ut-typeahead>
+                </ut-control-group>
+
+                <ut-control-group label="Proposed start date" required>
+                    <input
+                        type="text"
+                        datepicker-popup="M/dd/yyyy"
+                        ng-model="project.proposedStartDate"
+                        class="ut-input"
+                    />
+                </ut-control-group>
+
+                <ut-control-group label="Antigen (if applicable)">
+                    <ut-input
+                        model="project.antigen"
+                        error="project.errors.antigen"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Collaborators" class="ut-many-input-max-width">
+                    <ut-one-to-many
+                        resource="collaborator"
+                        model="project"
+                        foreign-key="collaboratorId"
+                        relation="HybridomaProjectCollaborators"
+                        access="project.collaborators"
+                        placeholder="groupName"
+                    />
+                    </ut-one-to-many>
+                </ut-control-group>
+
+                <ut-control-group label="Experimental Objective">
+                    <ut-input
+                        model="project.objective"
+                        error="project.errors.objective"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Screening ELISA Protocol">
+                    <ut-input
+                        model="project.screeningProtocol"
+                        error="project.errors.screeningProtocol"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Neutralization assay protocol">
+                    <ut-input
+                        model="project.neutProtocol"
+                        error="project.errors.neutProtocol"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Neutralization Location">
+                    <ut-input
+                        model="project.neutLocation"
+                        error="project.errors.neutLocation"
+                    >
+                    </ut-input>
+                </ut-control-group>
+
+                <ut-control-group label="Notes on scheduling">
+                    <textarea ng-model="project.schedulingNotes" class="ut-big-text-input"/>
+                </ut-control-group>
+
+                <div class="ut-form-divider"></div>
+
+                <ut-control-group label="Attachments">
+                    <ut-attachment-uploader o="HybridomaProject" oid="project.id" trigger="handleUpload"></ut-attachment-uploader>
+                </ut-control-group>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="save()" style="margin-right:5px;">
+        <a ng-if="project.id">Save</a>
+        <a ng-if="!project.id">Create</a>
+    </button>
+    <a href="" ng-click="cancel()">Cancel</a>
+</div>

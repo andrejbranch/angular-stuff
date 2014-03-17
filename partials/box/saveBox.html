@@ -1,0 +1,12 @@
+<ul>
+    <li ng-if='box.userCanEdit && !isSnapshot' class="save-box" ng-class="{'disabled':!positionsHaveChanged}" ut-box-save>
+        <p>Save</p>
+    </li>
+	<li ng-if='box.id && !box.userCanEdit' id="permission-box" ng-class="{'disabled': box.awaitingPermission}" ut-box-request>
+		<p ng-if='!box.awaitingPermission'>Request Permission</p>
+		<p ng-if='box.awaitingPermission'>Awaiting Permission</p>
+	</li>
+    <li ng-if='box.userCanEdit && isSnapshot' id="restore-box" ut-box-restore>
+        <p>Restore</p>
+    </li>
+</ul>

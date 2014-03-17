@@ -1,0 +1,31 @@
+<div id="targets-filter-container" ng-controller="TargetsFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Targets..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredTargets.length">
+            <li ng-repeat="filteredTarget in filteredTargets">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleTarget('remove', filteredTarget)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredTarget.abbreviation + " " + filteredTarget.name}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="target in targets | filter:search | orderBy:'abbreviation'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleTarget('append', target)"
+                    type="checkbox"
+                />
+                <div class="description">{{target.abbreviation + " " + target.name}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Targets</li>
+    </ul>
+</div>

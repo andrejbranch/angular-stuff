@@ -1,0 +1,194 @@
+<div id="ut-detail-container" class="ut-hp-detail-container">
+    <div class="header">
+        <div class="operations">
+            <ut-dropdown
+                icon="operations-icon-share"
+                title="Share"
+                template="/app/partials/grid/share.html"
+            >
+            </ut-dropdown>
+        </div>
+        <img class="hp-header-icon" src="/images/utilities/gocore/project-icon.jpg"/>
+        <ul class="ut-breadcrumbs">
+            <li ui-sref="gocore">GoCore</li>
+            <li ui-sref="projectGrid.search">Hybridoma Projects</li>
+            <li class="end">{{project.id}}</li>
+            <li class="title">{{project.name}}</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="toolbar">
+            <button class="btn" ng-click="edit()">
+                <i class="icon-pencil" />
+                Edit
+            </button>
+            <button class="btn" ng-click="comment()"><i class="icon-comment" /> Comment</button>
+        </div>
+        <div class="main-column">
+            <ut-edit-module title="Details">
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Objective:</td>
+                            <td>{{project.objective}}</td>
+                        </tr>
+                        <tr>
+                            <td>Target:</td>
+                            <td>
+                                <a class="flat-link" ng-href="/target/{{project.Target.id}}">
+                                {{project.Target.name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Antigen:</td>
+                            <td>{{project.antigen}}</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="detail-column">
+                    <table class="detail">
+                        <tr>
+                            <td>Screening Protocol:</td>
+                            <td>{{project.screeningProtocol}}</td>
+                        </tr>
+                        <tr>
+                            <td>Neutralization Protocol:</td>
+                            <td>{{project.neutProtocol}}</td>
+                        </tr>
+                        <tr>
+                            <td>Neutralization Location:</td>
+                            <td>{{project.neutLocation}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Scheduling Notes">
+                <div ng-bind-html="project.schedulingNotes"></div>
+            </ut-edit-module>
+
+            <ut-edit-module title="Experiments" class="ut-position-relative">
+                <div ng-include src="'/app/partials/hybridomaProject/experiment/_experiments_table.html'"/>
+            </ut-edit-module>
+
+            <ut-edit-module title="Reagents" class="ut-position-relative">
+                <div ng-include src="'/app/partials/hybridomaProject/reagent/_reagents_table.html'"/>
+            </ut-edit-module>
+
+            <ut-edit-module title="Meetings" class="ut-position-relative">
+                <div ng-include src="'/app/partials/hybridomaProject/meeting/_meetings_table.html'"/>
+            </ut-edit-module>
+
+            <ut-edit-module title="Attachments">
+                <ut-attachment-module
+                    o="HybridomaProject"
+                    oid="project.id"
+                >
+                </ut-attachment-module>
+            </ut-edit-module>
+
+            <ut-edit-module title="Activity">
+                <ut-activity-module
+                    o="Hyridoma Project"
+                    oid="project.id"
+                    comment="comment"
+                >
+                </ut-activity-module>
+            </ut-edit-module>
+        </div>
+        <div class="side-column">
+            <ut-edit-module title="People">
+                <table class="detail">
+                    <tr>
+                        <td>Creator:</td>
+                        <td>
+                            <img ng-if="project.userId" ng-src="/profile/avatar/{{project.userId}}" />
+                            {{project.User.fullName}}
+                        </td>
+                    </tr>
+                    <tr class="ut-hp-side-column-tr">
+                        <td>Collaborators:</td>
+                        <td>
+                            <ul class="collaborator-list">
+                                <li ng-repeat="collaborator in project.collaborators" class="collaborator">
+                                    <a ng-if="!$last"class="flat-link" ui-sref="collaborator({collaboratorId:collaborator.id})">
+                                        {{collaborator.groupName + ", " + "&nbsp;"}}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ui-sref="collaborator({collaboratorId:collaborator.id})">
+                                        {{collaborator.groupName}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="VIMs and MTAs">
+                <table class="detail" ng-controller="HybridomaProjectVimMtaController">
+                    <tr class="ut-hp-side-column-tr">
+                        <td>VIMs Orders:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="vimOrder in projectVimMta.vimOrders">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                        {{"VIM Order " + vimOrder.id + " " + vimOrder.vim_order_description + "&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/vim/order/{{vimOrder.id}}">
+                                        {{"VIM Order " + vimOrder.id + " " + vimOrder.vim_order_description}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="ut-hp-side-column-tr">
+                        <td>VIMs Sents:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="vimSent in projectVimMta.vimSents">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                        {{"VIM Sent " + vimSent.id + " " + vimSent.vim_sent_description + "&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/vim/sent/{{vimSent.id}}">
+                                        {{"VIM Sent " + vimSent.id + " " + vimSent.vim_sent_description}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="ut-hp-side-column-tr">
+                        <td>MTAs:</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="mta in projectVimMta.mtas">
+                                    <a ng-if="!$last" class="flat-link" ng-href="/utilities/mta/{{mta.id}}">
+                                        {{"MTA " + mta.id + " " + mta.short_description + "&nbsp;" }}
+                                    </a>
+                                    <a ng-if="$last" class="flat-link" ng-href="/utilities/mta/{{mta.id}}">
+                                        {{"MTA " + mta.id + " " + mta.short_description }}
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+            <ut-edit-module title="Dates">
+                <table class="detail">
+                    <tr>
+                        <td>Proposed Start Date:</td>
+                        <td ng-if="project.proposedStartDate">{{Date.parse(project.proposedStartDate) | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Created:</td>
+                        <td>{{Date.parse(project.created_at) | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Updated:</td>
+                        <td>{{Date.parse(project.updated_at) | date:'MM/dd/yy @ h:mma'}}</td>
+                    </tr>
+                </table>
+            </ut-edit-module>
+        </div>
+    </div>
+</div>

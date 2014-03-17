@@ -1,0 +1,31 @@
+<div id="samples-filter-container" ng-controller="SamplesFilterController">
+    <ul class="filters-users-list">
+        <li>
+            <input class="init-focus" ng-model="search" type="text" placeholder="Find Samples..."></input>
+        </li>
+        <ul class="selected" ng-if="filteredSamples.length">
+            <li ng-repeat="filteredSample in filteredSamples">
+                <label>
+                    <input
+                        ng-model="c"
+                        ng-checked="true"
+                        ng-change="toggleSample('remove', filteredSample)"
+                        type="checkbox"
+                    />
+                    <div class="description">{{filteredSample.description}}</div>
+                </label>
+            </li>
+        </ul>
+        <li ng-repeat="sample in samples | orderBy:'description'">
+            <label>
+                <input
+                    ng-model="c"
+                    ng-change="toggleSample('append', sample)"
+                    type="checkbox"
+                />
+                <div class="description">{{sample.description}}</div>
+            </label>
+        </li>
+        <li class="help">Start typing for Samples</li>
+    </ul>
+</div>

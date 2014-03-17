@@ -1,0 +1,22 @@
+<div id="attachment-module-container">
+    <table>
+        <tr ng-repeat="attachmentFile in attachmentFiles" class="file">
+            <td>
+                <a target="_blank" href="/attachment/{{attachmentFile.attachmentId}}">{{attachmentFile.Attachment.name}}</a>
+            </td>
+            <td>{{attachmentFile.Attachment.size | bytes}}</td>
+            <td>{{Date.parse(attachmentFile.Attachment.created_at) | date:'MM/dd/yy @ h:mma'}}</td>
+            <td class="delete"><i class="icon-trash" ng-click="deleteAttachment(attachmentFile)"/></td>
+        </tr>
+    </table>
+    <ul>
+        <li ng-repeat="attachmentImage in attachmentImages" class="image">
+            <img ng-src="/attachment/{{attachmentImage.attachmentId}}" />
+            <div class="name">
+                <a target="_blank" href="/attachment/{{attachmentImage.attachmentId}}">{{attachmentImage.Attachment.name}}</a>
+            </div>
+            <div class="size">{{attachmentImage.Attachment.size | bytes}}</div>
+            <i class="icon-trash" ng-click="deleteAttachment(attachmentImage)"/>
+        </li>
+    </ul>
+</div>
